@@ -1,0 +1,60 @@
+.app-wrapper {
+  .sidebar-container {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: 200px;
+    overflow: hidden;
+    transition: width 0.28s;
+    .el-scrollbar {
+      height: 100%;
+      .el-scrollbar__view {
+        height: 100%;
+      }
+    }
+    .el-menu {
+      height: 100%;
+      [class^="el-icon-"] {
+        margin-top: -2px;
+      }
+    }
+  }
+  .main-container {
+    min-height: 100%;
+    margin-left: 200px;
+    transition: margin-left 0.28s;
+  }
+
+  // reset element-ui css
+  .horizontal-collapse-transition {
+    transition: 0s width ease-in-out, 0s padding-left ease-in-out,
+      0s padding-right ease-in-out;
+  }
+
+  .scrollbar-wrapper {
+    overflow-x: hidden !important;
+  }
+
+  .el-scrollbar__bar.is-vertical {
+    right: 0px;
+  }
+
+  .el-scrollbar {
+    height: 100%;
+  }
+
+  // 收起侧边栏
+  &.hideSidebar {
+    .sidebar-container {
+      width: 65px !important;
+    }
+    .main-container {
+      margin-left: 65px;
+    }
+    .router-title,
+    .el-submenu__icon-arrow {
+      display: none !important;
+    }
+  }
+}
