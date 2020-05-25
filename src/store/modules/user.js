@@ -1,5 +1,6 @@
-import { login, getInfo } from '@/api/user'
+import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/token'
+import { resetRouter } from '@/router'
 
 const state = {
   token: getToken(),
@@ -12,6 +13,9 @@ const mutations = {
   },
   SET_NAME (state, name) {
     state.name = name
+  },
+  RESET_STATE: (state) => {
+    Object.assign(state, { token: getToken() })
   }
 }
 
@@ -24,6 +28,18 @@ const actions = {
         console.log(res)
         commit('SET_TOKEN', data.token)
         setToken(data.token)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  logout ({ commit }) {
+    return new Promise((resolve, reject) => {
+      logout().then(() => {
+        removeToken()
+        resetRouter()
+        commit('RESET_STATE')
         resolve()
       }).catch(error => {
         reject(error)
@@ -46,7 +62,7 @@ const actions = {
   resetToken ({ commit }) {
     return new Promise(resolve => {
       removeToken()
-      commit('SET_TOKEN', '')
+      commit('RESET_STATE')
       resolve()
     })
   }

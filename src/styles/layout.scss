@@ -15,8 +15,12 @@
     }
     .el-menu {
       height: 100%;
+      // 使侧边栏自定义图标与element图标表现一致
       [class^="el-icon-"] {
         margin-top: -2px;
+        &.iconfont{
+          font-family:"iconfont" !important;
+        }
       }
     }
   }
@@ -55,6 +59,14 @@
     .router-title,
     .el-submenu__icon-arrow {
       display: none !important;
+    }
+  }
+}
+// 隐藏侧边栏时，使自定义图标与element图标表现一致
+.el-menu--vertical {
+  [class^="el-icon-"] {
+    &.iconfont{
+      font-family:"iconfont" !important;
     }
   }
 }

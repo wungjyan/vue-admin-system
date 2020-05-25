@@ -3,28 +3,41 @@
     <div class="menu-toggle-btn" @click="toggleMenu">
       <i class="iconfont" :class="sidebarCollapse?'icon-indent':'icon-outdent'"></i>
     </div>
-    <screenfull class="screenfull-btn"/>
+    <breadcrumb class="breadcrumb-container"/>
+    <div class="right-menu">
+      <screenfull class="screenfull-btn"/>
+      <el-dropdown>
+        <span class="name">{{name}} <i class="el-icon-arrow-down el-icon--right"></i></span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item @click.native="handleLogout">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Screenfull from '@/components/Screenfull/index.vue'
+import Screenfull from '@/components/Screenfull'
+import Breadcrumb from '@/components/Breadcrumb'
 export default {
-  components: { Screenfull },
-  data () {
-    return {
-
-    }
-  },
+  components: { Screenfull, Breadcrumb },
   computed: {
     ...mapGetters([
-      'sidebarCollapse'
+      'sidebarCollapse',
+      'name'
     ])
   },
   methods: {
     toggleMenu () {
       this.$store.dispatch('app/setSidebarCollapse', !this.sidebarCollapse)
+    },
+    handleLogout () {
+      this.$store.dispatch('user/logout').then(() => {
+        this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      }).catch(error => {
+        this.$message.error(`退出登录失败：${error}`)
+      })
     }
   }
 }
@@ -44,18 +57,33 @@ export default {
     box-sizing: border-box;
     width: 50px;
     height: 100%;
-    padding: 15px;
+    padding: 0px 15px;
+    line-height: 50px;
     i{
       font-size: 20px;
     }
     &:hover{
-      background: #F2F6FC;
+      background: rgba(0, 0, 0, .025)
     }
   }
-  .screenfull-btn{
-    position: absolute;
-    right: 100px;
-    top:15px;
+  .breadcrumb-container{
+    margin-left: 60px;
   }
+  .right-menu{
+    position: absolute;
+    top: 0;
+    right: 20px;
+    height: 100%;
+    .screenfull-btn{
+      display: inline-block;
+      margin-top: 15px;
+      margin-right: 50px;
+    }
+    .el-dropdown{
+      top: -2px;
+      color: #303133;
+    }
+  }
+
 }
 </style>

@@ -25,14 +25,14 @@ export const constantRoutes = [
         path: '/dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: '标题', icon: 'setting' }
+        meta: { title: 'Dashboard', icon: '_dashboard' }
       }
     ]
   },
   {
     path: '/nested',
     component: Layout,
-    meta: { title: '嵌套菜单', icon: 'user' },
+    meta: { title: '嵌套菜单', icon: 'menu' },
     children: [
       {
         path: 'menu1',
@@ -81,7 +81,10 @@ export const constantRoutes = [
         meta: { title: 'menu2' }
       }
     ]
-  }
+  },
+
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new VueRouter({

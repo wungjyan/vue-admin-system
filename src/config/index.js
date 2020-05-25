@@ -1,7 +1,7 @@
 export default {
   baseUrl: {
-    dev: '',
-    prod: '',
+    development: '',
+    production: '',
     test: ''
   }
 }
