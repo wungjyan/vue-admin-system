@@ -1,8 +1,5 @@
 # vue-admin-system
-本项目参考花裤衩的[vue-admin-template](https://github.com/PanJiaChen/vue-admin-template)这个简易模板，自定制符合个人习惯的管理后台模板。在此先感谢大佬。
-
-**更完善的版本后续更新...**
-
+通用管理后台模板
 ## 分支
 - `easy-template`：简易模板，不包含权限控制以及更多组件
 
