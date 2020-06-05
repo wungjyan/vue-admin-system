@@ -1,7 +1,13 @@
 <template>
     <div>
     <el-scrollbar wrapClass="scrollbar-wrapper">
-      <el-menu :collapse="sidebarCollapse" @select="selectItem">
+      <el-menu
+      :default-active="activeMenu"
+      :collapse="sidebarCollapse"
+      :background-color="variables.menuBg"
+      :text-color="variables.menuText"
+      :active-text-color="variables.menuActiveText"
+       @select="selectItem">
         <sidebar-item
           v-for="route in routes"
           :key="route.path"
@@ -17,6 +23,7 @@
 import { constantRoutes } from '@/router/index.js'
 import SidebarItem from './SidebarItem'
 import { mapGetters } from 'vuex'
+import variables from '@/styles/variables.scss'
 export default {
   components: { SidebarItem },
   data () {
@@ -27,7 +34,13 @@ export default {
   computed: {
     ...mapGetters([
       'sidebarCollapse'
-    ])
+    ]),
+    variables () {
+      return variables
+    },
+    activeMenu () {
+      return this.$route.path
+    }
   },
   methods: {
     selectItem (index, indexpath) {

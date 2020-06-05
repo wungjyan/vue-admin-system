@@ -14,6 +14,7 @@
       }
     }
     .el-menu {
+      width:100%;
       height: 100%;
       // 使侧边栏自定义图标与element图标表现一致
       [class^="el-icon-"] {
@@ -21,6 +22,14 @@
         &.iconfont{
           font-family:"iconfont" !important;
         }
+      }
+    }
+
+    .el-submenu .el-menu-item {
+      background-color: $subMenuBg !important;
+
+      &:hover {
+        background-color: $subMenuHover !important;
       }
     }
   }
